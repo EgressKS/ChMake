@@ -60,7 +60,11 @@ export const useChatStore = create((set, get) => ({
     const { users } = get();
     if (!users.length) return null;
 
-    const randomUser = users[Math.floor(Math.random() * users.length)];
+    const onlineUsers = useAuthStore.getState().onlineUsers;
+    const filteredUsers = users.filter((user) => user._id !== useAuthStore.getState().authUser._id && onlineUsers.includes(user._id));
+
+    if (!filteredUsers.length) return null;
+    const randomUser = filteredUsers[Math.floor(Math.random() * filteredUsers.length)];
     set({ selectedUser: randomUser });
     return randomUser;
   },
