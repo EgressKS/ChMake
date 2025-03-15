@@ -8,7 +8,7 @@ const FriendsPage = () => {
   const [selectedFriend, setSelectedFriend] = useState(null);
 
   const { getFriends, userFriend, userFriendRequest, isUsersLoading } = useChatStore();
-  const { acceptFriendRequest, declineFriendRequest } = useAuthStore();
+  const { acceptFriendRequest, declineFriendRequest, onlineUsers } = useAuthStore();
 
   useEffect(() => {
     getFriends();
@@ -35,7 +35,7 @@ const FriendsPage = () => {
   return (
     <div className="pt-20 min-h-screen px-6 max-w-4xl mx-auto space-y-6">
       <h1 className="text-2xl font-bold">Friends</h1>
-      
+
       {/* Search Bar */}
       <div className="relative w-full">
         <Search className="absolute left-3 top-2.5 w-5 h-5 text-gray-500" />
@@ -47,18 +47,18 @@ const FriendsPage = () => {
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-      
+
       {/* Conditional Rendering */}
       {selectedFriend ? (
         <div className="bg-base-300 p-6 rounded-lg shadow-lg">
           <button onClick={() => setSelectedFriend(null)} className="mb-4 text-blue-500">Back to Friends List</button>
           <div className="flex items-center gap-4">
-            <img src={selectedFriend.profilePic} alt={selectedFriend.fullName} className="w-24 h-24 rounded-full object-cover" />
+            <img src={selectedFriend.profilePic || "/avatar.png"} alt={selectedFriend.fullName} className="w-20 h-20 rounded-full object-cover" />
             <div>
               <h2 className="text-xl font-semibold">{selectedFriend.fullName}</h2>
-              <p className="text-sm text-gray-500">Nickname: {selectedFriend.nickname}</p>
-              <p className="text-sm text-gray-500">Country: {selectedFriend.country}</p>
-              <p className="text-sm text-gray-500">City: {selectedFriend.city}</p>
+              <p className="text-sm text-gray-500">Nickname: {selectedFriend.nickname || "NA"}</p>
+              <p className="text-sm text-gray-500">Country: {selectedFriend.country || "NA"}</p>
+              <p className="text-sm text-gray-500">City: {selectedFriend.city || "NA"}</p>
             </div>
           </div>
         </div>
@@ -78,8 +78,10 @@ const FriendsPage = () => {
                     <div key={friend._id} className="flex items-center justify-between p-2 bg-base-200 rounded-lg cursor-pointer" onClick={() => handleFriendClick(friend)}>
                       <div className="flex items-center gap-4">
                         <div className="relative">
-                          <img src={friend.profilePic} alt={friend.fullName} className="w-12 h-12 rounded-full object-cover" />
-                          <span className={`absolute bottom-1 right-1 w-3 h-3 rounded-full ${friend.active ? 'bg-green-500' : 'bg-red-500'}`} />
+                          <img src={friend.profilePic || "/avatar.png"} alt={friend.fullName} className="w-12 h-12 rounded-full object-cover" />
+                          {onlineUsers.includes(friend._id) && (
+                            <span className="absolute bottom-1 right-0 w-3 h-3 bg-green-500 rounded-full ring-2 ring-white" />
+                          )}
                         </div>
                         <p className="text-sm font-medium">{friend.fullName}</p>
                       </div>
@@ -93,7 +95,7 @@ const FriendsPage = () => {
               </div>
             )}
           </div>
-          
+
           {/* Friend Requests */}
           <div className="bg-base-300 p-6 rounded-lg shadow-lg">
             <h2 className="text-lg font-semibold mb-4">Friend Requests</h2>
@@ -104,7 +106,7 @@ const FriendsPage = () => {
                 userFriendRequest.map((req) => (
                   <div key={req._id} className="flex items-center justify-between p-2 bg-base-200 rounded-lg">
                     <div className="flex items-center gap-4">
-                      <img src={req.profilePic} alt={req.fullName} className="w-12 h-12 rounded-full object-cover" />
+                      <img src={req.profilePic || "/avatar.png"} alt={req.fullName} className="w-12 h-12 rounded-full object-cover" />
                       <p className="text-sm font-medium">{req.fullName}</p>
                     </div>
                     <div className="flex gap-2">

@@ -92,7 +92,15 @@ export const updateProfile = async (req, res) => {
     let profilePic = req.user.profilePic;
 
     if (req.file) {
-      const uploadResponse = await cloudinary.uploader.upload(req.file.path);
+      const uploadResponse = await new Promise((resolve, reject) => {
+        cloudinary.uploader.upload_stream(
+          { resource_type: "auto" },
+          (error, result) => {
+            if (error) reject(error);
+            else resolve(result);
+          }
+        ).end(req.file.buffer);
+      });
       profilePic = uploadResponse.secure_url;
     }
 
