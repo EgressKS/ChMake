@@ -4,6 +4,7 @@ import { useAuthStore } from "../store/useAuthStore";
 import SidebarSkeleton from "./skeletons/SidebarSkeleton";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
+import toast from "react-hot-toast";
 
 const Sidebar = ({ CurrentTypeOfChat, isChatsActive, setIsChatsActive }) => {
   const { getUsers, getFriends, userFriend, selectedUser, getRandomUser, setSelectedUser, isUsersLoading } = useChatStore();
@@ -31,6 +32,16 @@ const Sidebar = ({ CurrentTypeOfChat, isChatsActive, setIsChatsActive }) => {
   const handleGetRandomUser = async () => {
     setIsChatsActive(true);
     const randomUser = await getRandomUser();
+    
+    if (!randomUser) {
+      toast.custom(
+        <div style={{ backgroundColor: 'red', color: 'white', padding: '10px', borderRadius: '5px' }}>
+          No other users are online, please try again later.
+        </div>
+      );
+      return;
+    }
+
     if (randomUser) {
       await addChatHistory(randomUser._id);
     }

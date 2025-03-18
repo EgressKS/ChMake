@@ -20,6 +20,7 @@ const App = () => {
   const { theme } = useThemeStore();
 
   console.log({ onlineUsers });
+  console.log(import.meta.env.MODE); 
 
   useEffect(() => {
     checkAuth();
