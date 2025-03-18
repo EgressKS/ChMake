@@ -5,7 +5,7 @@ let baseURL;
 if (import.meta.env.MODE === 'development') {
   baseURL = "http://localhost:5001/api";  
 } else {
-  baseURL = "https://ch-make-backend.vercel.app/api";  // Production URL
+  baseURL = "https://chmake-1.onrender.com/api";  // Production URL
 }
 
 export const axiosInstance = axios.create({
