@@ -25,6 +25,20 @@ app.use(
   })
 );
 
+app.get("/test-db", async (req, res) => {
+  try {
+      const db = mongoose.connection;
+      if (db.readyState === 1) {
+          return res.json({ success: true, message: "MongoDB is connected!" });
+      } else {
+          return res.status(500).json({ success: false, message: "MongoDB not connected!" });
+      }
+  } catch (error) {
+      return res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
