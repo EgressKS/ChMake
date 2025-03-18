@@ -13,7 +13,7 @@ let BASE_URL;
 if (import.meta.env.MODE === 'development') {
   BASE_URL = "http://localhost:5001";  // Development URL
 } else {
-  BASE_URL = "https://ch-make-backend.vercel.app";  // Production URL
+  BASE_URL = "https://chmake-1.onrender.com/";  // Production URL
 }
 
 export const useAuthStore = create((set, get) => ({
