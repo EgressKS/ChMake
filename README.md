@@ -1,85 +1,93 @@
-# ChMake-Chat-App
+# Talklocal – Language Learning Voice Chat Platform
 
-ChMake-Chat-App is a real-time chat application that allows users to connect and communicate with random users as well as their friends. Users can send friend requests, accept or decline them, and engage in private conversations.
+Talklocal is a real-time language learning platform that allows users to practice languages through voice-based chat rooms. Built using React, TypeScript, Express, and WebRTC, it helps learners connect with native speakers and improve communication skills in an immersive environment.
 
-## Features
+---
 
-- **Random Chat**: Connect with random users and start a conversation.
-- **Friend Requests**: Send and accept friend requests to build your contact list.
-- **Private Chat**: Chat securely with friends in private conversations.
-- **Real-Time Messaging**: Instant message delivery using WebSockets.
-- **User Authentication**: Secure login and signup for users.
-- **Online/Offline Status**: See which of your friends are online.
-- **Chat History**: Store and retrieve previous conversations.
+## ⭐ Features
 
-## Tech Stack
+### 🎙 Real-Time Communication
+- Voice chat using WebRTC  
+- WebSocket-based signaling  
+- Join/leave room events  
+- Real-time text chat  
+- Active speaker indicators  
 
-- **Frontend**: Next.js, Tailwind CSS
-- **Backend**: Node.js, Express.js
-- **Database**: MySQL + MongoDB + Redis (for caching)
-- **WebSockets**: Socket.io for real-time messaging
-- **Authentication**: JSON Web Tokens (JWT)
+### 👥 Social Features
+- Follow users to build your network  
+- View followers & following lists  
+- User profiles with bio & language preferences  
+- Learning streak tracking  
+- Basic user rating system  
 
-## Installation
+### 🔐 Authentication
+- Email/password signup and login  
+- JWT authentication  
+- Password hashing using bcrypt  
+- Protected routes  
 
-### Prerequisites
-Make sure you have the following installed:
-- Node.js
-- MySQL
-- MongoDB
-- Redis (optional for caching but recommended)
+### 🏠 Room Management
+- Create language/topic-based rooms  
+- Search and filter rooms  
+- Host controls (mute/kick)  
+- Participant limits (4–12 users)  
+- Real-time room updates  
 
-### Steps to Set Up
+### 🎨 UI/UX
+- Tailwind CSS + Shadcn UI  
+- Fully responsive design  
+- Dark/Light mode (default dark)  
+- Smooth, modern animations  
 
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/yourusername/ChMake-Chat-App.git
-   cd ChMake-Chat-App
-   ```
+---
 
-2. Install dependencies for both frontend and backend:
-   ```sh
-   cd backend
-   npm install
-   cd ../frontend
-   npm install
-   ```
+## 🛠 Tech Stack
 
-3. Configure environment variables:
-   - Create a `.env` file in the root directory and add the required environment variables:
-     ```env
-     MONGODB_URI=...
-     PORT=5001
-     JWT_SECRET=...
+### Frontend
+- React 18 + TypeScript  
+- Zustand  
+- TanStack Query v5  
+- WebRTC + WebSocket client  
+- Tailwind + Shadcn UI  
+- Wouter routing
 
-     CLOUDINARY_CLOUD_NAME=...
-     CLOUDINARY_API_KEY=...
-     CLOUDINARY_API_SECRET=...
+### Backend
+- Node.js + Express  
+- TypeScript  
+- WebSocket (ws)  
+- JWT + bcrypt  
+- Zod validation  
+- In-memory storage  
 
-     NODE_ENV=development
-     ```
+---
 
-4. Set up the database:
-   - Create a MySQL database and update the `.env` file with the credentials.
-   - Run migrations (if applicable).
+## 🔧 Steps to Set Up
 
-5. Start the backend server:
-   ```sh
-   cd backend
-   npm run dev
-   ```
+1. Clone the repository
+```sh
+git clone https://github.com/yourusername/talklocal.git
+cd talklocal
+```
 
-6. Start the frontend:
-   ```sh
-   cd frontend
-   npm run dev
-   ```
+2. Install dependencies for both frontend and backend
+```sh
+cd server
+npm install
 
-## Usage
-- Sign up or log in to start using the app.
-- Connect with random users or send friend requests.
-- Accept or decline friend requests.
-- Start chatting in real-time!
+cd ../client
+npm install
+```
+
+3. Start the backend server
+```sh
+cd server
+npm run dev
+```
+4. Start the frontend
+```sh
+cd ../client
+npm run dev
+```
 
 ## Contributing
 Feel free to submit issues, feature requests, or contribute by making pull requests.
